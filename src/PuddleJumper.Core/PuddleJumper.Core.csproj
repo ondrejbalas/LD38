@@ -66,4 +66,9 @@
     <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <PropertyGroup>
+    <PostBuildEvent>mkdir "$(SolutionDir)../duality/Plugins"
+copy "$(TargetPath)" "$(SolutionDir)../duality/Plugins"
+copy "$(TargetDir)$(TargetName).pdb" "$(SolutionDir)../duality/Plugins"</PostBuildEvent>
+  </PropertyGroup>
 </Project>
