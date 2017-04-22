@@ -10,17 +10,15 @@ namespace PuddleJumper.Core.GameObjects
     {
         public WorldMap MapObject { get; set; }
         public WorldMapData MapData { get; set; }
-        public WorldGenerator MapGenerator { get; set; }
         public AirportSpawner AirportSpawner { get; set; }
-        public List<Airport> Airports { get; set; } = new List<Airport>();
+        public List<AirportController> Airports { get; set; } = new List<AirportController>();
 
         private bool regenerateWorld;
 
-        public World(WorldMapData mapData, WorldGenerator mapGenerator, AirportSpawner airportSpawner)
+        public World(WorldMapData mapData, AirportSpawner airportSpawner)
         {
             regenerateWorld = true;
             MapData = mapData;
-            MapGenerator = mapGenerator;
             AirportSpawner = airportSpawner;
         }
 
@@ -48,10 +46,7 @@ namespace PuddleJumper.Core.GameObjects
 
         public void GenerateNewMap()
         {
-            int height = (int)DualityApp.TargetResolution.Y;
-            
-            MapData.NoiseMap = MapGenerator.Generate(height, height);
-
+            MapData.Regenerate();
             MapObject.Draw(MapData);
         }
     }

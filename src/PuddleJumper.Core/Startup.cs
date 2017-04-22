@@ -3,6 +3,7 @@ using Duality.Resources;
 using Ninject;
 using PuddleJumper.Core.GameObjects;
 using PuddleJumper.Core.GameObjects.Map;
+using PuddleJumper.Core.Helpers;
 
 namespace PuddleJumper.Core
 {
@@ -15,6 +16,13 @@ namespace PuddleJumper.Core
 
         protected override void InitPlugin()
         {
+            DualityUserData data = DualityApp.UserData;
+            data.GfxMode = ScreenMode.Fullscreen;
+            data.GfxWidth = 1600;
+            data.GfxHeight = 900;
+            DualityApp.UserData = data;
+            DualityApp.SaveUserData();
+
             base.InitPlugin();
 
             Configure();
@@ -33,14 +41,25 @@ namespace PuddleJumper.Core
             kernel.Bind<World>().ToSelf().InSingletonScope();
             kernel.Bind<WorldMapData>().ToSelf().InSingletonScope();
         }
-
-        private bool IsCalled = false;
+        
+        private bool addedObject = false;
         protected override void OnBeforeUpdate()
         {
             base.OnBeforeUpdate();
             if (!initComplete) return;
 
-            IsCalled = true;
+            if (!addedObject)
+            {
+                var go = Scene.Current.FindGameObject("WorldMap");
+                if (go != null)
+                {
+                    go.AddComponent<WorldMap>();
+                    addedObject = true;
+                }
+            }
+
+            if(DualityApp.ExecContext != DualityApp.ExecutionContext.Editor)
+                ScalingHelpers.SetScale();
 
             World.Update();
         }

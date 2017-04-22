@@ -22,7 +22,7 @@ namespace PuddleJumper.Core.GameObjects.Map
             Log.Editor.WriteWarning("Initing in context: " + context);
             if (context == InitContext.Activate)
             {
-                var height = (int) DualityApp.TargetResolution.Y;
+                var height = (int) Difficulty.Current.GameAreaSize;
                 pixelData = new PixelData(height, height, ColorRgba.Black);
 
                 var pixmap = new Pixmap(pixelData);
@@ -41,10 +41,7 @@ namespace PuddleJumper.Core.GameObjects.Map
 
         public void Draw(WorldMapData mapData)
         {
-            if(pixelData.Height != mapData.NoiseMap.Height || pixelData.Width != mapData.NoiseMap.Width) 
-                throw new ArgumentOutOfRangeException(nameof(mapData), "NoiseMap and PixelData are not the same size");
-
-            var noiseMap = mapData.NoiseMap;
+            var noiseMap = mapData.GetMapScaledForDrawing(pixelData.Width, pixelData.Height);
 
             for (int x = 0; x < pixelData.Width; x++)
             {

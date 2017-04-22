@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Linq;
 using Duality;
+using Duality.Resources;
 using Ninject;
 using PuddleJumper.Core.GameObjects;
 using PuddleJumper.Core.GameObjects.Map;
@@ -13,9 +14,12 @@ namespace PuddleJumper.Core.Generators
         private readonly AirportNameGenerator nameGenerator;
         private readonly WorldMapData data;
 
+        private ContentRef<Prefab> airportPrefab = null;
+
         private Random rng = new Random();
-        private byte nameStartCharacter = (byte) 'A';
+        private byte nameStartCharacter = (byte)'A';
         public int DesiredAirports { get; set; } = Difficulty.Current.StartingAirports;
+        private bool spawnAirports = true;
         public double LastAirportSpawnInSeconds { get; set; }
 
         private Lazy<World> lazyWorld = new Lazy<World>(() => Startup.World);
@@ -30,16 +34,39 @@ namespace PuddleJumper.Core.Generators
         private void SpawnAirport()
         {
             var loc = GetValidAirportLocation();
-            world.Airports.Add(new Airport(nameGenerator.GetAirportName((char)nameStartCharacter++), loc.Item1, loc.Item2));
+            if (loc == null) return;
+
+            if (airportPrefab == null)
+            {
+                airportPrefab = ContentProvider.RequestContent<Prefab>(@"Data\Prefabs\AirportPrefab.Prefab.res");
+            }
+            
+            var obj = airportPrefab.Res.Instantiate(new Vector3(loc.Value.Item1 - 600, loc.Value.Item2 - 600, 0));
+            var newAirport = obj.GetComponent<AirportController>();
+            newAirport.Name = nameGenerator.GetAirportName((char) nameStartCharacter++);
+            newAirport.X = loc.Value.Item1;
+            newAirport.Y = loc.Value.Item2;
+
+            world.Airports.Add(newAirport);
             LastAirportSpawnInSeconds = Time.GameTimer.TotalSeconds;
         }
 
-        private (int x, int y, MapPoint pt) GetValidAirportLocation()
+        private (int x, int y, MapPoint pt)? GetValidAirportLocation()
         {
+            int failCounter = 0;
+
             var pt = GetRandomLandPoint();
             var v = new Vector2(pt.Item1, pt.Item2);
-            while (world.Airports.Any(a => new Vector2(a.X, a.Y).GetDistance(v) < 300))
+            while (world.Airports.Any(a => new Vector2(a.X, a.Y).GetDistance(v) < Difficulty.Current.MinimumAirportDistance))
             {
+                failCounter++;
+
+                if (failCounter > 100)
+                {
+                    spawnAirports = false;
+                    return null;
+                }
+
                 pt = GetRandomLandPoint();
                 v = new Vector2(pt.Item1, pt.Item2);
             }
@@ -58,21 +85,21 @@ namespace PuddleJumper.Core.Generators
 
         private (int x, int y, MapPoint pt) GetRandomPoint()
         {
-            var x = rng.Next(data.NoiseMap.Width);
-            var y = rng.Next(data.NoiseMap.Height);
-            var pt = data.NoiseMap[x, y].ToMapPoint();
+            var x = rng.Next(data.GameAreaMap.Width);
+            var y = rng.Next(data.GameAreaMap.Height);
+            var pt = data.GameAreaMap[x, y].ToMapPoint();
             return (x, y, pt);
         }
 
         public void Update()
         {
             if (world == null) return;
-            if (data?.NoiseMap == null) return;
+            if (data?.GameAreaMap == null) return;
 
             if (LastAirportSpawnInSeconds + Difficulty.Current.TimeBetweenAirportSpawns < Time.GameTimer.TotalSeconds)
                 DesiredAirports++;
 
-            while (world.Airports.Count < DesiredAirports)
+            while (spawnAirports && world.Airports.Count < DesiredAirports)
             {
                 SpawnAirport();
             }

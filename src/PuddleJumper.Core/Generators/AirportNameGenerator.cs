@@ -11,7 +11,7 @@ namespace PuddleJumper.Core.Generators
 
         public AirportNameGenerator()
         {
-            cityNamesLookup = CityNames().ToLookup(c => c[0]);
+            cityNamesLookup = CityNames().Where(cn => cn.Length <= 14).ToLookup(c => c[0]);
         }
 
         public string GetAirportName(char startingCharacter)
