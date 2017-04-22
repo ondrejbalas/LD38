@@ -8,7 +8,7 @@ namespace PuddleJumper.Core
     {
         public WorldMap()
         {
-            var rng = new Perlin()
+            //var rng = new Perlin()
         }
 
         public void Draw()
