@@ -53,15 +53,15 @@ namespace PuddleJumper.Core.GameObjects
                 {
                     if (noiseMap[x, y] < 0.7f)
                     {
-                        pixelData[x, y] = ColorRgba.Green;
+                        pixelData[x, y] = MagicStrings.Grass;
                     }
                     else if (noiseMap[x, y] < 0.73f)
                     {
-                        pixelData[x, y] = MagicStrings.Brown;
+                        pixelData[x, y] = MagicStrings.Sand;
                     }
                     else
                     {
-                        pixelData[x, y] = ColorRgba.Blue;
+                        pixelData[x, y] = MagicStrings.Ocean;
                     }
                 }
             }

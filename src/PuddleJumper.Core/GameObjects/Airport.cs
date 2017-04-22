@@ -1,6 +1,7 @@
 ﻿using Duality;
 using Duality.Components;
 using Duality.Components.Renderers;
+using Duality.Drawing;
 
 namespace PuddleJumper.Core.GameObjects
 {
@@ -14,16 +15,17 @@ namespace PuddleJumper.Core.GameObjects
         public Airport(string name)
         {
             Name = name;
+            Size = 1;
         }
 
         public void OnInit(InitContext context)
         {
-            throw new System.NotImplementedException();
+            var renderer = GameObj.GetComponent<TextRenderer>();
+            renderer.Text = new FormattedText($"{Name} - {Size}");
         }
 
         public void OnShutdown(ShutdownContext context)
         {
-            throw new System.NotImplementedException();
         }
     }
 }

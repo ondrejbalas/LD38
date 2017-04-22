@@ -10,15 +10,22 @@ namespace PuddleJumper.Core.GameObjects
         public WorldMap MapObject { get; set; }
         public WorldMapData MapData { get; set; }
         public WorldGenerator MapGenerator { get; set; }
+        public AirportNameGenerator AirportNameGenerator { get; set; }
         public List<Airport> Airports { get; set; } = new List<Airport>();
 
         private bool regenerateWorld;
 
-        public World(WorldMapData mapData, WorldGenerator mapGenerator)
+        public World(WorldMapData mapData, WorldGenerator mapGenerator, AirportNameGenerator airportNameGenerator)
         {
             regenerateWorld = true;
             MapData = mapData;
             MapGenerator = mapGenerator;
+            AirportNameGenerator = airportNameGenerator;
+        }
+
+        public void AddAirport()
+        {
+            
         }
 
         public void RegenerateWorld()
