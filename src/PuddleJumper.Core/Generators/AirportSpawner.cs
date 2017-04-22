@@ -41,11 +41,9 @@ namespace PuddleJumper.Core.Generators
                 airportPrefab = ContentProvider.RequestContent<Prefab>(@"Data\Prefabs\AirportPrefab.Prefab.res");
             }
             
-            var obj = airportPrefab.Res.Instantiate(new Vector3(loc.Value.Item1 - 600, loc.Value.Item2 - 600, 0));
+            var obj = airportPrefab.Res.Instantiate(new Vector3(loc.Value.Item1, loc.Value.Item2, 0));
             var newAirport = obj.GetComponent<AirportController>();
             newAirport.Name = nameGenerator.GetAirportName((char) nameStartCharacter++);
-            newAirport.X = loc.Value.Item1;
-            newAirport.Y = loc.Value.Item2;
 
             world.Airports.Add(newAirport);
             LastAirportSpawnInSeconds = Time.GameTimer.TotalSeconds;

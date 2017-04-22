@@ -35,7 +35,7 @@ namespace PuddleJumper.Core.GameObjects.Map
                 renderer.SharedMaterial = mainMat;
 
                 var transform = GameObj.GetComponent<Transform>();
-                transform.Pos = new Vector3(-(height / 2), -(height / 2), 500);
+                transform.Pos = new Vector3(0, 0, 500);
             }
         }
 
