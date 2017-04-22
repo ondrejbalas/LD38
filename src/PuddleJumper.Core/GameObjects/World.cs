@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using Duality;
 using Duality.Resources;
+using PuddleJumper.Core.GameObjects.Map;
 using PuddleJumper.Core.Generators;
 
 namespace PuddleJumper.Core.GameObjects
@@ -10,22 +11,17 @@ namespace PuddleJumper.Core.GameObjects
         public WorldMap MapObject { get; set; }
         public WorldMapData MapData { get; set; }
         public WorldGenerator MapGenerator { get; set; }
-        public AirportNameGenerator AirportNameGenerator { get; set; }
+        public AirportSpawner AirportSpawner { get; set; }
         public List<Airport> Airports { get; set; } = new List<Airport>();
 
         private bool regenerateWorld;
 
-        public World(WorldMapData mapData, WorldGenerator mapGenerator, AirportNameGenerator airportNameGenerator)
+        public World(WorldMapData mapData, WorldGenerator mapGenerator, AirportSpawner airportSpawner)
         {
             regenerateWorld = true;
             MapData = mapData;
             MapGenerator = mapGenerator;
-            AirportNameGenerator = airportNameGenerator;
-        }
-
-        public void AddAirport()
-        {
-            
+            AirportSpawner = airportSpawner;
         }
 
         public void RegenerateWorld()
@@ -46,13 +42,15 @@ namespace PuddleJumper.Core.GameObjects
                     regenerateWorld = false;
                 }
             }
+
+            AirportSpawner.Update();
         }
 
         public void GenerateNewMap()
         {
             int height = (int)DualityApp.TargetResolution.Y;
             
-            MapData = MapGenerator.Generate(height, height);
+            MapData.NoiseMap = MapGenerator.Generate(height, height);
 
             MapObject.Draw(MapData);
         }

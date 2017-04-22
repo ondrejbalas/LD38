@@ -53,6 +53,9 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.ValueTuple, Version=4.0.1.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.ValueTuple.4.3.0\lib\netstandard1.0\System.ValueTuple.dll</HintPath>
+    </Reference>
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -60,15 +63,20 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="GameDifficulty.cs" />
     <Compile Include="GameObjects\Airport.cs" />
+    <Compile Include="GameObjects\Map\MapPoint.cs" />
     <Compile Include="GameObjects\World.cs" />
     <Compile Include="Generators\AirportNameGenerator.cs" />
+    <Compile Include="Generators\AirportSpawner.cs" />
     <Compile Include="Generators\WorldGenerator.cs" />
-    <Compile Include="GameObjects\WorldMapData.cs" />
+    <Compile Include="GameObjects\Map\WorldMapData.cs" />
+    <Compile Include="Helpers\MapHelpers.cs" />
+    <Compile Include="Helpers\MathHelpers.cs" />
     <Compile Include="MagicStrings.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
-    <Compile Include="GameObjects\WorldMap.cs" />
+    <Compile Include="GameObjects\Map\WorldMap.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

@@ -1,5 +1,6 @@
 ﻿using System;
 using PuddleJumper.Core.GameObjects;
+using PuddleJumper.Core.GameObjects.Map;
 using SharpNoise;
 using SharpNoise.Modules;
 
@@ -23,7 +24,7 @@ namespace PuddleJumper.Core.Generators
             };
         }
 
-        public WorldMapData Generate(int width, int height)
+        public NoiseMap Generate(int width, int height)
         {
             noise.Seed = rng.Next();
             var map = new NoiseMap(width, height);
@@ -38,8 +39,8 @@ namespace PuddleJumper.Core.Generators
                     map[x, y] = ((float)noise.GetValue(x * wMult - 1, y * hMult - 1, 0d)) + 1f / 2;
                 }
             }
-
-            return new WorldMapData() {NoiseMap = map};
+            
+            return map;
         }
     }
 }

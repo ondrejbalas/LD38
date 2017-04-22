@@ -5,10 +5,9 @@ using Duality.Components.Renderers;
 using Duality.Drawing;
 using Duality.Editor;
 using Duality.Resources;
-using SharpNoise;
-using SharpNoise.Modules;
+using PuddleJumper.Core.Helpers;
 
-namespace PuddleJumper.Core.GameObjects
+namespace PuddleJumper.Core.GameObjects.Map
 {
     [EditorHintCategory("GameWorld")]
     [RequiredComponent(typeof(SpriteRenderer))]
@@ -43,7 +42,7 @@ namespace PuddleJumper.Core.GameObjects
         public void Draw(WorldMapData mapData)
         {
             if(pixelData.Height != mapData.NoiseMap.Height || pixelData.Width != mapData.NoiseMap.Width) 
-                throw new ArgumentOutOfRangeException("mapData", "NoiseMap and PixelData are not the same size");
+                throw new ArgumentOutOfRangeException(nameof(mapData), "NoiseMap and PixelData are not the same size");
 
             var noiseMap = mapData.NoiseMap;
 
@@ -51,18 +50,8 @@ namespace PuddleJumper.Core.GameObjects
             {
                 for (int y = 0; y < pixelData.Height; y++)
                 {
-                    if (noiseMap[x, y] < 0.7f)
-                    {
-                        pixelData[x, y] = MagicStrings.Grass;
-                    }
-                    else if (noiseMap[x, y] < 0.73f)
-                    {
-                        pixelData[x, y] = MagicStrings.Sand;
-                    }
-                    else
-                    {
-                        pixelData[x, y] = MagicStrings.Ocean;
-                    }
+                    var mapPoint = noiseMap[x, y].ToMapPoint();
+                    pixelData[x, y] = mapPoint.Color;
                 }
             }
 

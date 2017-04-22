@@ -1,6 +1,6 @@
 ﻿using SharpNoise;
 
-namespace PuddleJumper.Core.GameObjects
+namespace PuddleJumper.Core.GameObjects.Map
 {
     public class WorldMapData
     {
