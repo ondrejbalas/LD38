@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using Duality;
 using Duality.Resources;
+using PuddleJumper.Core.Generators;
 
 namespace PuddleJumper.Core.GameObjects
 {

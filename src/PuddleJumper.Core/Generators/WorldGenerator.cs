@@ -1,8 +1,9 @@
 ﻿using System;
+using PuddleJumper.Core.GameObjects;
 using SharpNoise;
 using SharpNoise.Modules;
 
-namespace PuddleJumper.Core.GameObjects
+namespace PuddleJumper.Core.Generators
 {
     public class WorldGenerator
     {

@@ -5,6 +5,8 @@ VisualStudioVersion = 15.0.26403.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PuddleJumper.Core", "PuddleJumper.Core\PuddleJumper.Core.csproj", "{566E81E4-8D16-4935-86ED-F962C36BEB92}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PuddleJumper.Tests", "PuddleJumper.Tests\PuddleJumper.Tests.csproj", "{86F998C4-8D83-4FE9-9A80-51DFBDB25A7A}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{566E81E4-8D16-4935-86ED-F962C36BEB92}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{566E81E4-8D16-4935-86ED-F962C36BEB92}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{566E81E4-8D16-4935-86ED-F962C36BEB92}.Release|Any CPU.Build.0 = Release|Any CPU
+		{86F998C4-8D83-4FE9-9A80-51DFBDB25A7A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{86F998C4-8D83-4FE9-9A80-51DFBDB25A7A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{86F998C4-8D83-4FE9-9A80-51DFBDB25A7A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{86F998C4-8D83-4FE9-9A80-51DFBDB25A7A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
