@@ -2,11 +2,13 @@
 using Duality;
 using Duality.Resources;
 using PuddleJumper.Core.GameObjects;
+using PuddleJumper.Core.GameObjects.Plane;
 
 namespace PuddleJumper.Core.Generators
 {
     public class PlaneSpawner
     {
+        private readonly Scorekeeper scorekeeper;
         private int lastAssignedPlaneNumber = 1;
         private ContentRef<Prefab> planePrefab = null;
         private Lazy<World> lazyWorld = new Lazy<World>(() => Startup.World);
@@ -14,7 +16,12 @@ namespace PuddleJumper.Core.Generators
 
         private Random rng = new Random();
 
-        public void SpawnPlane(int size)
+        public PlaneSpawner(Scorekeeper scorekeeper)
+        {
+            this.scorekeeper = scorekeeper;
+        }
+
+        public void SpawnPlane(PlaneTypes type)
         {
             if (world.Airports.Count < 2) return;
 
@@ -31,7 +38,8 @@ namespace PuddleJumper.Core.Generators
             newPlane.TargetAirport = airports.dest;
             newPlane.IsSelected = true;
             newPlane.Number = lastAssignedPlaneNumber++;
-            newPlane.Size = size;
+            newPlane.Type = type;
+            newPlane.Scorekeeper = scorekeeper;
 
             world.Planes.Add(newPlane);
             Scene.Current.AddObject(obj);

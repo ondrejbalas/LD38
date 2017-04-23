@@ -40,6 +40,7 @@ namespace PuddleJumper.Core
             kernel = new StandardKernel();
             kernel.Bind<World>().ToSelf().InSingletonScope();
             kernel.Bind<WorldMapData>().ToSelf().InSingletonScope();
+            kernel.Bind<Scorekeeper>().ToSelf().InSingletonScope();
         }
         
         private bool addedObject = false;

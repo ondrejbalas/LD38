@@ -68,6 +68,8 @@
     <Compile Include="GameObjects\Map\MapPoint.cs" />
     <Compile Include="GameObjects\Passenger.cs" />
     <Compile Include="GameObjects\PlaneController.cs" />
+    <Compile Include="GameObjects\Plane\PlaneTypes.cs" />
+    <Compile Include="GameObjects\ScoreKeeper.cs" />
     <Compile Include="GameObjects\World.cs" />
     <Compile Include="Generators\AirportNameGenerator.cs" />
     <Compile Include="Generators\AirportSpawner.cs" />
@@ -77,6 +79,7 @@
     <Compile Include="Helpers\MathHelpers.cs" />
     <Compile Include="Helpers\ScalingHelpers.cs" />
     <Compile Include="MagicStrings.cs" />
+    <Compile Include="GameObjects\Plane\PlaneParameters.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Shapes\Rectangle.cs" />
     <Compile Include="Startup.cs" />

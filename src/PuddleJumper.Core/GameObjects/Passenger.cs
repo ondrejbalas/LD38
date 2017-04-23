@@ -7,15 +7,7 @@ namespace PuddleJumper.Core.GameObjects
     {
         public char Destination { get; set; }
         public double SpawnTime { get; set; } = Time.GameTimer.TotalSeconds;
-
-        public void Update()
-        {
-            var waitingTime = Time.GameTimer.TotalSeconds - SpawnTime;
-            if (waitingTime > Difficulty.Current.PassengerPatience)
-            {
-                // lose points
-            }
-        }
+        public double ArrivalTime { get; set; }
 
         public override string ToString()
         {

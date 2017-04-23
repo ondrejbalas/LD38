@@ -12,6 +12,7 @@ namespace PuddleJumper.Core.Generators
 {
     public class AirportSpawner
     {
+        private readonly Scorekeeper scorekeeper;
         private readonly AirportNameGenerator nameGenerator;
         private readonly WorldMapData data;
 
@@ -25,10 +26,11 @@ namespace PuddleJumper.Core.Generators
         private Lazy<World> lazyWorld = new Lazy<World>(() => Startup.World);
         private World world { get { return lazyWorld.Value; } }
 
-        public AirportSpawner(AirportNameGenerator nameGenerator, WorldMapData data)
+        public AirportSpawner(AirportNameGenerator nameGenerator, WorldMapData data, Scorekeeper scorekeeper)
         {
             this.nameGenerator = nameGenerator;
             this.data = data;
+            this.scorekeeper = scorekeeper;
         }
 
         private void SpawnAirport()
@@ -46,6 +48,7 @@ namespace PuddleJumper.Core.Generators
             newAirport.Name = nameGenerator.GetAirportName((char) nameStartCharacter++);
             newAirport.Size = 1;
             newAirport.NextSpawnTime = rng.Next(0, Difficulty.Current.PassengerSpawnDelays[0]);
+            newAirport.Scorekeeper = scorekeeper;
 
             world.Airports.Add(newAirport);
             Scene.Current.AddObject(obj);

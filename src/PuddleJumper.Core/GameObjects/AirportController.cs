@@ -12,6 +12,7 @@ namespace PuddleJumper.Core.GameObjects
     [EditorHintCategory("PuddleJumper")]
     public class AirportController : Component, ICmpInitializable, ICmpUpdatable
     {
+        public Scorekeeper Scorekeeper { get; set; }
         private static Random rng = new Random();
 
         public string Name { get; set; } = "Airport Name";
@@ -69,6 +70,14 @@ namespace PuddleJumper.Core.GameObjects
 
             // Update passenger list
             GameObj.ChildByName("PassengersText").GetComponent<TextRenderer>().Text.SourceText = string.Join("", Passengers.Select(p => p.ToString()));
+
+            // Check for passengers that have run out of patience
+            var angryPassengers = Passengers.Where(p => (Time.GameTimer.TotalSeconds - p.SpawnTime) > Difficulty.Current.PassengerPatience);
+            foreach (var angryPassenger in angryPassengers)
+            {
+                Scorekeeper.AddAngryPassenger(angryPassenger);
+                Passengers.Remove(angryPassenger);
+            }
         }
     }
 }

@@ -3,6 +3,7 @@ using System.Linq;
 using Duality;
 using Duality.Resources;
 using PuddleJumper.Core.GameObjects.Map;
+using PuddleJumper.Core.GameObjects.Plane;
 using PuddleJumper.Core.Generators;
 
 namespace PuddleJumper.Core.GameObjects
@@ -53,7 +54,7 @@ namespace PuddleJumper.Core.GameObjects
             AirportSpawner.Update();
             if (!Planes.Any())
             {
-                PlaneSpawner.SpawnPlane(1);
+                PlaneSpawner.SpawnPlane(PlaneTypes.PuddleJumper);
             }
         }
 
