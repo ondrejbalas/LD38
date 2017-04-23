@@ -6,6 +6,8 @@ using Duality.Components;
 using Duality.Components.Renderers;
 using Duality.Drawing;
 using Duality.Editor;
+using Duality.Input;
+using PuddleJumper.Core.Helpers;
 
 namespace PuddleJumper.Core.GameObjects
 {
@@ -77,6 +79,28 @@ namespace PuddleJumper.Core.GameObjects
             {
                 Scorekeeper.AddAngryPassenger(angryPassenger);
                 Passengers.Remove(angryPassenger);
+            }
+
+            var positionTransform = GameObj.GetComponent<Transform>();
+            var topRect = GameObj.ChildByName("BgTop").GetComponent<SpriteRenderer>().Rect;
+            var bottomRect = GameObj.ChildByName("Bg").GetComponent<SpriteRenderer>().Rect;
+
+            var rect = new Rect(bottomRect.X, topRect.Y, topRect.W, topRect.Y + topRect.H + bottomRect.H);
+            var currentRectangle = new Rect(rect.X + positionTransform.Pos.X, rect.Y + positionTransform.Pos.Y, rect.W, rect.H);
+
+            if (DualityApp.Mouse.ButtonHit(MouseButton.Right))
+            {
+                ;
+            }
+
+            if (Startup.World.SelectedPlane != null)
+            {
+                var offset = Key.F9;
+                bool isClicked = DualityApp.Keyboard.KeyHit(offset + Letter) || MouseButton.Right.IsClicked(currentRectangle);
+                if (isClicked)
+                {
+                    Startup.World.SelectedPlane.TargetAirport = this;
+                }
             }
         }
     }

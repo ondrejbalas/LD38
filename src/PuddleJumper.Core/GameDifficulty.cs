@@ -9,11 +9,11 @@ namespace PuddleJumper.Core
 
         private static Difficulty Normal => new Difficulty()
             {
-                TimeBetweenAirportSpawns = 5,
+                TimeBetweenAirportSpawns = 30,
                 StartingAirports = 3,
-                MaxAirports = 10,
+                MaxAirports = 3,
                 MinimumAirportDistance = 250,
-                PassengerPatience = 30,
+                PassengerPatience = 45,
                 PassengerSpawnDelays = new []{ 20, 15, 12, 9 }.ToList(),
                 PassengerSpawnDelayFluctuation = 0.1f,
                 PlaneSpeedMultiplier = 2.0f
@@ -29,6 +29,6 @@ namespace PuddleJumper.Core
         public float PlaneSpeedMultiplier { get; set; }
 
         public int GameAreaSize { get; set; } = 1200;
-        public bool TeaserMode { get; set; } = true;
+        public bool TeaserMode { get; set; } = false;
     }
 }

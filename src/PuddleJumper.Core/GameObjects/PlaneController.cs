@@ -91,17 +91,11 @@ namespace PuddleJumper.Core.GameObjects
 
         private void HandlePlaneSelection()
         {
-            var camera = Scene.Current.FindComponents<Camera>().Single();
-            var mousePos = camera.GetSpaceCoord(DualityApp.Mouse.Pos);
-
             var renderer = GameObj.GetComponent<SpriteRenderer>();
             var positionTransform = GameObj.Parent.GetComponent<Transform>();
             var currentRectangle = new Rect(renderer.Rect.X + positionTransform.Pos.X, renderer.Rect.Y + positionTransform.Pos.Y, renderer.Rect.W, renderer.Rect.H);
 
-            bool planeIsSelected = DualityApp.Keyboard.KeyHit(Key.Number0 + Number);
-            planeIsSelected = planeIsSelected || (currentRectangle.Contains(new Vector2(mousePos.X, mousePos.Y)) &&
-                                                  DualityApp.Mouse.ButtonHit(MouseButton.Left));
-
+            bool planeIsSelected = DualityApp.Keyboard.KeyHit(Key.Number0 + Number) || MouseButton.Left.IsClicked(currentRectangle);
 
             if (planeIsSelected)
             {

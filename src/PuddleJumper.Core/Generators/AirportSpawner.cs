@@ -100,7 +100,7 @@ namespace PuddleJumper.Core.Generators
             if (world == null) return;
             if (data?.GameAreaMap == null) return;
 
-            if (LastAirportSpawnInSeconds + Difficulty.Current.TimeBetweenAirportSpawns < Time.GameTimer.TotalSeconds)
+            if (LastAirportSpawnInSeconds + Difficulty.Current.TimeBetweenAirportSpawns < Time.GameTimer.TotalSeconds && DesiredAirports < Difficulty.Current.MaxAirports)
                 DesiredAirports++;
 
             while (spawnAirports && world.Airports.Count < DesiredAirports)

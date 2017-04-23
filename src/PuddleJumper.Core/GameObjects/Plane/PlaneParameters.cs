@@ -20,7 +20,7 @@ namespace PuddleJumper.Core.GameObjects.Plane
                     return new PlaneParameters()
                     {
                         PassengerCapacity = 3,
-                        BoardingDelay = 5,
+                        BoardingDelay = 4,
                         FuelBurnRate = 1f,
                         LuxuryLevel = 0,
                         Speed = 1.0f,
@@ -30,7 +30,7 @@ namespace PuddleJumper.Core.GameObjects.Plane
                     return new PlaneParameters()
                     {
                         PassengerCapacity = 6,
-                        BoardingDelay = 4,
+                        BoardingDelay = 3,
                         FuelBurnRate = 2f,
                         LuxuryLevel = 0,
                         Speed = 1.4f,
@@ -40,7 +40,7 @@ namespace PuddleJumper.Core.GameObjects.Plane
                     return new PlaneParameters()
                     {
                         PassengerCapacity = 10,
-                        BoardingDelay = 3,
+                        BoardingDelay = 2,
                         FuelBurnRate = 8f,
                         LuxuryLevel = 0,
                         Speed = 2.4f,
@@ -50,7 +50,7 @@ namespace PuddleJumper.Core.GameObjects.Plane
                     return new PlaneParameters()
                     {
                         PassengerCapacity = 24,
-                        BoardingDelay = 1.5f,
+                        BoardingDelay = 1,
                         FuelBurnRate = 30f,
                         LuxuryLevel = 0,
                         Speed = 1.8f,
