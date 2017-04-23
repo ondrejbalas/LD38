@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using Duality;
 using Duality.Resources;
 using PuddleJumper.Core.GameObjects;
@@ -34,7 +35,7 @@ namespace PuddleJumper.Core.Generators
 
             var obj = planePrefab.Res.Instantiate(new Vector3(airports.src.X, airports.src.Y, 0));
 
-            var newPlane = obj.GetComponent<PlaneController>();
+            var newPlane = obj.GetComponentsInChildren<PlaneController>().Single();
             newPlane.TargetAirport = airports.dest;
             newPlane.IsSelected = true;
             newPlane.Number = lastAssignedPlaneNumber++;

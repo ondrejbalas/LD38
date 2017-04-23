@@ -54,7 +54,7 @@ namespace PuddleJumper.Core.GameObjects
             AirportSpawner.Update();
             if (!Planes.Any())
             {
-                PlaneSpawner.SpawnPlane(PlaneTypes.PuddleJumper);
+                PlaneSpawner.SpawnPlane(PlaneTypes.DualProp);
             }
         }
 

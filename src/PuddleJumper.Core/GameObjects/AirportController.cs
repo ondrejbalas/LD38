@@ -72,7 +72,7 @@ namespace PuddleJumper.Core.GameObjects
             GameObj.ChildByName("PassengersText").GetComponent<TextRenderer>().Text.SourceText = string.Join("", Passengers.Select(p => p.ToString()));
 
             // Check for passengers that have run out of patience
-            var angryPassengers = Passengers.Where(p => (Time.GameTimer.TotalSeconds - p.SpawnTime) > Difficulty.Current.PassengerPatience);
+            var angryPassengers = Passengers.Where(p => (Time.GameTimer.TotalSeconds - p.SpawnTime) > Difficulty.Current.PassengerPatience).ToList();
             foreach (var angryPassenger in angryPassengers)
             {
                 Scorekeeper.AddAngryPassenger(angryPassenger);

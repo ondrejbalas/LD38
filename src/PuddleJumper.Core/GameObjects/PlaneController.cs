@@ -6,6 +6,7 @@ using Duality;
 using Duality.Components;
 using Duality.Components.Renderers;
 using Duality.Editor;
+using Duality.Resources;
 using PuddleJumper.Core.GameObjects.Plane;
 using PuddleJumper.Core.Helpers;
 
@@ -27,6 +28,7 @@ namespace PuddleJumper.Core.GameObjects
             {
                 type = value;
                 Parameters = PlaneParameters.Create(type);
+                typeChanged = true;
             }
         }
 
@@ -61,6 +63,7 @@ namespace PuddleJumper.Core.GameObjects
 
         private Random rng = new Random();
         private PlaneTypes type;
+        private bool typeChanged = false;
 
         public void OnInit(InitContext context)
         {
@@ -72,27 +75,48 @@ namespace PuddleJumper.Core.GameObjects
 
         public void OnUpdate()
         {
+            if (typeChanged)
+            {
+                typeChanged = false;
+                var material = ContentProvider.RequestContent<Material>($@"Data\Art\{Parameters.MaterialName}.Material.res").Res;
+                var texture = material.MainTexture.Res;
+                var renderer = GameObj.GetComponent<SpriteRenderer>();
+                renderer.Rect = new Rect(-texture.Size.X / 2, -texture.Size.Y / 2, texture.Size.X, texture.Size.Y);
+                renderer.SharedMaterial = material;
+
+                // Pax Transform Positions are (relative) both -n where n is the greater of the sprite renderer's rect width/2 or height/2
+                var paxTextTransform = GameObj.Parent.ChildByName("PassengersText").GetComponent<Transform>();
+                var n = Math.Max(renderer.Rect.W / 2, renderer.Rect.H / 2);
+                paxTextTransform.RelativePos = new Vector3(-n, -n, 0);
+            }
+
+            // Update passenger list
+            GameObj.Parent.ChildByName("PassengersText").GetComponent<TextRenderer>().Text.SourceText = string.Join("", Passengers.Select(p => p.ToString()));
+
             if (!AtAirport)
             { // we're flyyyyying
+                if (TargetAirport == null) return;
+
                 var distance = Time.TimeMult * Difficulty.Current.PlaneSpeedMultiplier;
-                var transform = GameObj.GetComponent<Transform>();
-                var pos = transform.Pos;
+                var rotationTransform = GameObj.GetComponent<Transform>();
+                var positionTransform = GameObj.Parent.GetComponent<Transform>();
+                var pos = positionTransform.Pos;
 
                 if (new Vector2(pos.X, pos.Y).GetDistance(new Vector2(TargetAirport.X, TargetAirport.Y)) > 5f)
                 {
                     // Calculate new angle
                     var planeAngle = (new Vector2(TargetAirport.X, TargetAirport.Y) - new Vector2(pos.X, pos.Y)).Angle;
-                    transform.Angle = planeAngle;
+                    rotationTransform.Angle = planeAngle;
 
                     // Calculate new movement
-                    transform.Pos = new Vector3(new Vector2(pos.X, pos.Y) + Vector2.FromAngleLength(planeAngle, distance),
+                    positionTransform.Pos = new Vector3(new Vector2(pos.X, pos.Y) + Vector2.FromAngleLength(planeAngle, distance),
                         pos.Z);
                 }
                 else
                 {
                     AtAirport = true;
                     TargetAirport.Planes.Add(this);
-                    transform.Angle = 0;
+                    rotationTransform.Angle = 0;
                 }
             }
             else
@@ -122,9 +146,12 @@ namespace PuddleJumper.Core.GameObjects
                     { // Teaser mode - pick another airport to fly to
                         if (Passengers.Any())
                         {
-                            
+                            TargetAirport = Startup.World.Airports.Single(a => a.Letter == Passengers.First().Destination);
                         }
-                        TargetAirport = Startup.World.Airports[rng.Next(Startup.World.Airports.Count)];
+                        else
+                        {
+                            TargetAirport = Startup.World.Airports[rng.Next(Startup.World.Airports.Count)];
+                        }
                     }
                 }
             }
