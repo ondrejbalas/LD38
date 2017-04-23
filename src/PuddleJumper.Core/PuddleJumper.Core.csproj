@@ -80,6 +80,7 @@
     <Compile Include="Generators\PlaneSpawner.cs" />
     <Compile Include="Helpers\MapHelpers.cs" />
     <Compile Include="Helpers\MathHelpers.cs" />
+    <Compile Include="Helpers\MenuHelpers.cs" />
     <Compile Include="Helpers\MouseHelpers.cs" />
     <Compile Include="Helpers\ScalingHelpers.cs" />
     <Compile Include="MagicStrings.cs" />

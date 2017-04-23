@@ -22,7 +22,7 @@ namespace PuddleJumper.Core.Shapes
 
             // Calculate my rectangle in worldspace
             var renderer = GameObj.GetComponent<SpriteRenderer>();
-            var positionTransform = GameObj.Parent.GetComponent<Transform>();
+            var positionTransform = GameObj.GetComponent<Transform>();
             var currentRectangle = new Rect(renderer.Rect.X + positionTransform.Pos.X, renderer.Rect.Y + positionTransform.Pos.Y, renderer.Rect.W, renderer.Rect.H);
 
             // Is the mouse hovering over it?

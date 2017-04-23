@@ -20,6 +20,8 @@ namespace PuddleJumper.Core.GameObjects
         public List<PlaneController> Planes { get; set; } = new List<PlaneController>();
         public PlaneController SelectedPlane { get; set; } = null;
 
+        private ContentRef<Prefab> planeInMenuPrefab = null;
+
         private bool regenerateWorld;
 
         public World(WorldMapData mapData, AirportSpawner airportSpawner, PlaneSpawner planeSpawner, Scorekeeper scorekeeper)
@@ -36,8 +38,38 @@ namespace PuddleJumper.Core.GameObjects
             regenerateWorld = true;
         }
 
+        private bool hasInit = false;
+        private void Init()
+        {
+            if (DualityApp.ExecContext == DualityApp.ExecutionContext.Editor) return;
+
+            if (planeInMenuPrefab == null)
+            {
+                planeInMenuPrefab = ContentProvider.RequestContent<Prefab>(@"Data\Prefabs\PlaneInMenu.Prefab.res");
+            }
+
+            var menuGameObject = Scene.Current.FindGameObject("Menu").ChildByName("Planes");
+
+            for (int i = 0; i < 4; i++)
+            {
+                var planeMenuObj = planeInMenuPrefab.Res.Instantiate();
+                planeMenuObj.Parent = menuGameObject;
+                planeMenuObj.Transform.RelativePos = new Vector3(0, i * 214, -10);
+                planeMenuObj.Name = "PlaneInMenu" + (i + 1);
+                planeMenuObj.ChildByName("RightArea").ChildByName("HasPlane").Active = false;
+                planeMenuObj.ChildByName("LeftArea").ChildByName("Image").Active = false;
+            }
+
+            hasInit = true;
+        }
+
         public void Update()
         {
+            if (!hasInit)
+            {
+                Init();
+            }
+
             if (regenerateWorld)
             {
                 if(MapObject == null)

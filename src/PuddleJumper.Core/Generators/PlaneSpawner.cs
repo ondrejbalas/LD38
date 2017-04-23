@@ -4,6 +4,7 @@ using Duality;
 using Duality.Resources;
 using PuddleJumper.Core.GameObjects;
 using PuddleJumper.Core.GameObjects.Plane;
+using PuddleJumper.Core.Helpers;
 
 namespace PuddleJumper.Core.Generators
 {
@@ -33,12 +34,13 @@ namespace PuddleJumper.Core.Generators
             }
 
             var obj = planePrefab.Res.Instantiate(new Vector3(airports.src.X, airports.src.Y, -100));
-
             var newPlane = obj.GetComponentsInChildren<PlaneController>().Single();
             newPlane.TargetAirport = airports.dest;
             newPlane.Number = GetNewPlaneNumber();
             newPlane.Type = type;
             newPlane.Scorekeeper = scorekeeper;
+
+            newPlane.PlaneInMenu = MenuHelpers.GetPlaneInMenuPrefab(newPlane.Number);
 
             world.Planes.Add(newPlane);
             Scene.Current.AddObject(obj);

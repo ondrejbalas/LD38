@@ -26,6 +26,8 @@ namespace PuddleJumper.Core.GameObjects
         public static ColorRgba SelectedColorTint { get; } = new ColorRgba(79, 196, 255);
         public static ColorRgba UnselectedColorTint { get; } = new ColorRgba(255, 255, 255);
 
+        public GameObject PlaneInMenu { get; set; }
+
         public PlaneTypes Type
         {
             get { return type; }
@@ -73,6 +75,11 @@ namespace PuddleJumper.Core.GameObjects
         public void OnUpdate()
         {
             CheckType();
+
+            if (!inMenu)
+            {
+                AddToMenu();
+            }
 
             // Update passenger list
             GameObj.Parent.ChildByName("PassengersText").GetComponent<TextRenderer>().Text.SourceText = string.Join("", Passengers.Select(p => p.ToString()));
@@ -196,6 +203,27 @@ namespace PuddleJumper.Core.GameObjects
                 var n = Math.Max(renderer.Rect.W / 2, renderer.Rect.H / 2);
                 paxTextTransform.RelativePos = new Vector3(-n, -n, 0);
             }
+        }
+
+        private bool inMenu = false;
+        private void AddToMenu()
+        {
+            var material = ContentProvider.RequestContent<Material>($@"Data\Art\{Parameters.MaterialName}.Material.res").Res;
+            var texture = material.MainTexture.Res;
+            var renderer = PlaneInMenu.ChildByName("LeftArea").ChildByName("Image").GetComponent<SpriteRenderer>();
+            renderer.Rect = new Rect(-texture.Size.X / 2, -texture.Size.Y / 2, texture.Size.X, texture.Size.Y);
+            renderer.SharedMaterial = material;
+
+            PlaneInMenu.ChildByName("RightArea").ChildByName("HasPlane").Active = true;
+            PlaneInMenu.ChildByName("RightArea").ChildByName("NoPlane").Active = false;
+            PlaneInMenu.ChildByName("LeftArea").ChildByName("Image").Active = true;
+        }
+
+        private void RemoveFromMenu()
+        {
+            PlaneInMenu.ChildByName("RightArea").ChildByName("HasPlane").Active = false;
+            PlaneInMenu.ChildByName("RightArea").ChildByName("NoPlane").Active = true;
+            PlaneInMenu.ChildByName("LeftArea").ChildByName("Image").Active = false;
         }
     }
 }

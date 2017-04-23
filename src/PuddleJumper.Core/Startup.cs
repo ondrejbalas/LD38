@@ -31,7 +31,6 @@ namespace PuddleJumper.Core
             scene.MakeAvailable();
 
             World = kernel.Get<World>();
-
             initComplete = true;
         }
 
