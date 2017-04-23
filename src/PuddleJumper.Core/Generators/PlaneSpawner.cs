@@ -10,7 +10,6 @@ namespace PuddleJumper.Core.Generators
     public class PlaneSpawner
     {
         private readonly Scorekeeper scorekeeper;
-        private int lastAssignedPlaneNumber = 1;
         private ContentRef<Prefab> planePrefab = null;
         private Lazy<World> lazyWorld = new Lazy<World>(() => Startup.World);
         private World world { get { return lazyWorld.Value; } }
@@ -37,12 +36,23 @@ namespace PuddleJumper.Core.Generators
 
             var newPlane = obj.GetComponentsInChildren<PlaneController>().Single();
             newPlane.TargetAirport = airports.dest;
-            newPlane.Number = lastAssignedPlaneNumber++;
+            newPlane.Number = GetNewPlaneNumber();
             newPlane.Type = type;
             newPlane.Scorekeeper = scorekeeper;
 
             world.Planes.Add(newPlane);
             Scene.Current.AddObject(obj);
+        }
+
+        private int GetNewPlaneNumber()
+        {
+            int num = 1;
+            var usedNumbers = world.Planes.Select(x => x.Number);
+            while (usedNumbers.Contains(num))
+            {
+                num++;
+            }
+            return num;
         }
 
         private (AirportController src, AirportController dest) SelectAirports()

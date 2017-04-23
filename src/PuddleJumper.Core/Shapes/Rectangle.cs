@@ -15,7 +15,7 @@ namespace PuddleJumper.Core.Shapes
     {
         private bool colorChanged = true;
         private Rect pixelDataRectangle = new Rect();
-        
+
         public ColorRgba Color
         {
             get { return color; }
@@ -75,7 +75,8 @@ namespace PuddleJumper.Core.Shapes
 
             if (!renderer.Rect.Equals(pixelDataRectangle))
             {
-                pixelData = CreatePixelData((int)renderer.Rect.W, (int)renderer.Rect.H);
+                pixelDataRectangle = renderer.Rect;
+                pixelData = CreatePixelData((int)renderer.Rect.W, (int)renderer.Rect.H, Color);
                 var pixmap = new Pixmap(pixelData);
                 texture = new Texture(pixmap);
                 var technique = new DrawTechnique(BlendMode.Solid);
@@ -89,32 +90,37 @@ namespace PuddleJumper.Core.Shapes
         {
         }
 
-        public void OnUpdate()
+        public virtual void OnUpdate()
         {
             CheckForResize();
 
             if (colorChanged)
             {
+                Redraw(Color);
                 colorChanged = false;
-                var newData = CreatePixelData(pixelData.Width, pixelData.Height);
-                pixelData.SetData(newData.Data);
-                texture.ReloadData();
             }
         }
 
-        private PixelData CreatePixelData(int width, int height)
+        protected void Redraw(ColorRgba mainColor)
+        {
+            var newData = CreatePixelData(pixelData.Width, pixelData.Height, mainColor);
+            pixelData.SetData(newData.Data);
+            texture.ReloadData();
+        }
+
+        protected PixelData CreatePixelData(int width, int height, ColorRgba mainColor)
         {
             PixelData pixelData;
-            
+
             if (BorderSize > 0)
             {
                 pixelData = new PixelData(width, height, BorderColor);
-                var fgData = new PixelData(Math.Max(width - BorderSize * 2, 0), Math.Max(height - BorderSize * 2, 0), Color);
+                var fgData = new PixelData(Math.Max(width - BorderSize * 2, 0), Math.Max(height - BorderSize * 2, 0), mainColor);
                 fgData.DrawOnto(pixelData, BlendMode.Solid, BorderSize, BorderSize, Math.Max(width - BorderSize * 2, 0), Math.Max(height - BorderSize * 2, 0));
             }
             else
             {
-                pixelData = new PixelData(width, height, Color);
+                pixelData = new PixelData(width, height, mainColor);
             }
             return pixelData;
         }

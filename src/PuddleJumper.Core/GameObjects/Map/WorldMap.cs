@@ -19,7 +19,7 @@ namespace PuddleJumper.Core.GameObjects.Map
 
         public void OnInit(InitContext context)
         {
-            Log.Editor.WriteWarning("Initing in context: " + context);
+            //Log.Editor.WriteWarning("Initing in context: " + context);
             if (context == InitContext.Activate)
             {
                 var height = (int) Difficulty.Current.GameAreaSize;

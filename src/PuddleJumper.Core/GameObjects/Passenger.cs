@@ -5,9 +5,10 @@ namespace PuddleJumper.Core.GameObjects
 {
     public class Passenger
     {
-        public char Destination { get; set; }
+        public char SpawnAirport { get; set; }
         public double SpawnTime { get; set; } = Time.GameTimer.TotalSeconds;
         public double ArrivalTime { get; set; }
+        public char Destination { get; set; }
 
         public override string ToString()
         {

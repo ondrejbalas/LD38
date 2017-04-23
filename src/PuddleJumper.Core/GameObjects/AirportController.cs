@@ -67,7 +67,7 @@ namespace PuddleJumper.Core.GameObjects
                 NextSpawnTime = Time.GameTimer.TotalSeconds + nextSpawnIn;
 
                 var otherAirports = Startup.World.Airports.Where(a => a.Letter != Letter).ToList();
-                Passengers.Add(new Passenger() { Destination = otherAirports[rng.Next(otherAirports.Count)].Letter });
+                Passengers.Add(new Passenger() { Destination = otherAirports[rng.Next(otherAirports.Count)].Letter, SpawnAirport = Letter });
             }
 
             // Update passenger list

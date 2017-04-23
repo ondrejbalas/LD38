@@ -23,7 +23,7 @@ namespace PuddleJumper.Core.GameObjects.Plane
                         BoardingDelay = 4,
                         FuelBurnRate = 1f,
                         LuxuryLevel = 0,
-                        Speed = 1.0f,
+                        Speed = 200f,
                         MaterialName = "plane-small"
                     };
                 case PlaneTypes.DualProp:
@@ -33,7 +33,7 @@ namespace PuddleJumper.Core.GameObjects.Plane
                         BoardingDelay = 3,
                         FuelBurnRate = 2f,
                         LuxuryLevel = 0,
-                        Speed = 1.4f,
+                        Speed = 300f,
                         MaterialName = "plane-med"
                     };
                 case PlaneTypes.NarrowBody:
@@ -43,7 +43,7 @@ namespace PuddleJumper.Core.GameObjects.Plane
                         BoardingDelay = 2,
                         FuelBurnRate = 8f,
                         LuxuryLevel = 0,
-                        Speed = 2.4f,
+                        Speed = 600f,
                         MaterialName = "plane-big"
                     };
                 case PlaneTypes.Heavy:
@@ -53,7 +53,7 @@ namespace PuddleJumper.Core.GameObjects.Plane
                         BoardingDelay = 1,
                         FuelBurnRate = 30f,
                         LuxuryLevel = 0,
-                        Speed = 1.8f,
+                        Speed = 450f,
                         MaterialName = "plane-jumbo"
                     };
                 default:

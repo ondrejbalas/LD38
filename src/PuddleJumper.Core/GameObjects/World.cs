@@ -11,6 +11,7 @@ namespace PuddleJumper.Core.GameObjects
 {
     public class World
     {
+        private readonly Scorekeeper scorekeeper;
         public WorldMap MapObject { get; set; }
         public WorldMapData MapData { get; set; }
         public AirportSpawner AirportSpawner { get; set; }
@@ -21,8 +22,9 @@ namespace PuddleJumper.Core.GameObjects
 
         private bool regenerateWorld;
 
-        public World(WorldMapData mapData, AirportSpawner airportSpawner, PlaneSpawner planeSpawner)
+        public World(WorldMapData mapData, AirportSpawner airportSpawner, PlaneSpawner planeSpawner, Scorekeeper scorekeeper)
         {
+            this.scorekeeper = scorekeeper;
             regenerateWorld = true;
             MapData = mapData;
             AirportSpawner = airportSpawner;
@@ -56,10 +58,10 @@ namespace PuddleJumper.Core.GameObjects
             AirportSpawner.Update();
             if (!Planes.Any())
             {
-                PlaneSpawner.SpawnPlane(PlaneTypes.PuddleJumper);
-                PlaneSpawner.SpawnPlane(PlaneTypes.DualProp);
+                //PlaneSpawner.SpawnPlane(PlaneTypes.PuddleJumper);
+                //PlaneSpawner.SpawnPlane(PlaneTypes.DualProp);
                 PlaneSpawner.SpawnPlane(PlaneTypes.NarrowBody);
-                PlaneSpawner.SpawnPlane(PlaneTypes.Heavy);
+                //PlaneSpawner.SpawnPlane(PlaneTypes.Heavy);
                 //PlaneSpawner.SpawnPlane(PlaneTypes.DualProp);
             }
 
@@ -68,6 +70,8 @@ namespace PuddleJumper.Core.GameObjects
                 SelectedPlane.IsSelected = false;
                 SelectedPlane = null;
             }
+
+            scorekeeper.UpdateUi();
         }
 
         public void GenerateNewMap()

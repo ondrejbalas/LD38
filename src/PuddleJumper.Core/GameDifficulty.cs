@@ -16,8 +16,10 @@ namespace PuddleJumper.Core
                 PassengerPatience = 45,
                 PassengerSpawnDelays = new []{ 20, 15, 12, 9 }.ToList(),
                 PassengerSpawnDelayFluctuation = 0.1f,
-                PlaneSpeedMultiplier = 1.5f / 250
+                PlaneSpeedMultiplier = 1.5f / 250,
+                MoneyMultiplier = 5.0f
             };
+
 
         public int TimeBetweenAirportSpawns { get; set; }
         public int StartingAirports { get; set; }
@@ -27,6 +29,7 @@ namespace PuddleJumper.Core
         public List<int> PassengerSpawnDelays { get; set; }
         public float PassengerSpawnDelayFluctuation { get; set; }
         public float PlaneSpeedMultiplier { get; set; }
+        public float MoneyMultiplier { get; set; }
 
         public int GameAreaSize { get; set; } = 1200;
         public bool TeaserMode { get; set; } = false;
