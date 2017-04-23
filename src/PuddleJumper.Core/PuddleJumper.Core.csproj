@@ -67,11 +67,12 @@
     <Compile Include="GameObjects\AirportController.cs" />
     <Compile Include="GameObjects\Map\MapPoint.cs" />
     <Compile Include="GameObjects\Passenger.cs" />
+    <Compile Include="GameObjects\PlaneController.cs" />
     <Compile Include="GameObjects\World.cs" />
     <Compile Include="Generators\AirportNameGenerator.cs" />
     <Compile Include="Generators\AirportSpawner.cs" />
-    <Compile Include="Generators\WorldGenerator.cs" />
     <Compile Include="GameObjects\Map\WorldMapData.cs" />
+    <Compile Include="Generators\PlaneSpawner.cs" />
     <Compile Include="Helpers\MapHelpers.cs" />
     <Compile Include="Helpers\MathHelpers.cs" />
     <Compile Include="Helpers\ScalingHelpers.cs" />

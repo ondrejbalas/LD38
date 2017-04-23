@@ -12,6 +12,7 @@ namespace PuddleJumper.Core.GameObjects
         public WorldMapData MapData { get; set; }
         public AirportSpawner AirportSpawner { get; set; }
         public List<AirportController> Airports { get; set; } = new List<AirportController>();
+        public List<PlaneController> Planes { get; set; } = new List<PlaneController>();
 
         private bool regenerateWorld;
 

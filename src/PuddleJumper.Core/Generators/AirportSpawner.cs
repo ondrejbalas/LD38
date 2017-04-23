@@ -15,14 +15,13 @@ namespace PuddleJumper.Core.Generators
         private readonly AirportNameGenerator nameGenerator;
         private readonly WorldMapData data;
 
-        private ContentRef<Prefab> airportPrefab = null;
-
         private Random rng = new Random();
         private byte nameStartCharacter = (byte)'A';
         public int DesiredAirports { get; set; } = Difficulty.Current.StartingAirports;
         private bool spawnAirports = true;
         public double LastAirportSpawnInSeconds { get; set; }
 
+        private ContentRef<Prefab> airportPrefab = null;
         private Lazy<World> lazyWorld = new Lazy<World>(() => Startup.World);
         private World world { get { return lazyWorld.Value; } }
 

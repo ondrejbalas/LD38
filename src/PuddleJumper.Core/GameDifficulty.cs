@@ -25,6 +25,7 @@ namespace PuddleJumper.Core
         public int PassengerPatience { get; set; } // time a passenger waits before they give up and take a bus (and you lose reputation?)
         public List<int> PassengerSpawnDelays { get; set; }
         public float PassengerSpawnDelayFluctuation { get; set; }
+        public float PlaneSpeedMultiplier { get; set; } = 1.0f;
 
         public int GameAreaSize { get; set; } = 1200;
     }
