@@ -62,6 +62,12 @@ namespace PuddleJumper.Core.GameObjects
                 PlaneSpawner.SpawnPlane(PlaneTypes.Heavy);
                 //PlaneSpawner.SpawnPlane(PlaneTypes.DualProp);
             }
+
+            if (DualityApp.Keyboard.KeyHit(Key.Escape) && SelectedPlane != null)
+            {
+                SelectedPlane.IsSelected = false;
+                SelectedPlane = null;
+            }
         }
 
         public void GenerateNewMap()

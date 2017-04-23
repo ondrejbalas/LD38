@@ -157,7 +157,7 @@ namespace PuddleJumper.Core.GameObjects
         {
             if (TargetAirport == null) return;
 
-            var distance = Time.TimeMult * Difficulty.Current.PlaneSpeedMultiplier;
+            var distance = Time.TimeMult * Difficulty.Current.PlaneSpeedMultiplier * Parameters.Speed;
             var rotationTransform = GameObj.GetComponent<Transform>();
             var positionTransform = GameObj.Parent.GetComponent<Transform>();
             var pos = positionTransform.Pos;
