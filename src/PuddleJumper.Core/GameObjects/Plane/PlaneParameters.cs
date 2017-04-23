@@ -44,7 +44,7 @@ namespace PuddleJumper.Core.GameObjects.Plane
                         FuelBurnRate = 8f,
                         LuxuryLevel = 0,
                         Speed = 2.4f,
-                        MaterialName = "plane-med"
+                        MaterialName = "plane-big"
                     };
                 case PlaneTypes.Heavy:
                     return new PlaneParameters()
@@ -54,7 +54,7 @@ namespace PuddleJumper.Core.GameObjects.Plane
                         FuelBurnRate = 30f,
                         LuxuryLevel = 0,
                         Speed = 1.8f,
-                        MaterialName = "plane-med"
+                        MaterialName = "plane-jumbo"
                     };
                 default:
                     throw new Exception("Implement this");

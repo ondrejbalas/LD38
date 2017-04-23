@@ -57,7 +57,9 @@ namespace PuddleJumper.Core.GameObjects
             if (!Planes.Any())
             {
                 PlaneSpawner.SpawnPlane(PlaneTypes.PuddleJumper);
-                //PlaneSpawner.SpawnPlane(PlaneTypes.DualProp);
+                PlaneSpawner.SpawnPlane(PlaneTypes.DualProp);
+                PlaneSpawner.SpawnPlane(PlaneTypes.NarrowBody);
+                PlaneSpawner.SpawnPlane(PlaneTypes.Heavy);
                 //PlaneSpawner.SpawnPlane(PlaneTypes.DualProp);
             }
         }
