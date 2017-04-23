@@ -27,7 +27,7 @@ namespace PuddleJumper.Core.GameObjects
             var waitingTime = Time.GameTimer.TotalSeconds - SpawnTime;
             float patience = (float) (1.0f - waitingTime / Difficulty.Current.PassengerPatience);
 
-            return MathHelpers.GetColorString(patience);
+            return $"{MathHelpers.GetColorString(patience)}{Destination}";
         }
     }
 }

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using Duality;
 using Duality.Resources;
@@ -44,8 +45,11 @@ namespace PuddleJumper.Core.Generators
             var obj = airportPrefab.Res.Instantiate(new Vector3(loc.Value.Item1, loc.Value.Item2, 0));
             var newAirport = obj.GetComponent<AirportController>();
             newAirport.Name = nameGenerator.GetAirportName((char) nameStartCharacter++);
+            newAirport.Size = 1;
+            newAirport.NextSpawnTime = rng.Next(0, Difficulty.Current.PassengerSpawnDelays[0]);
 
             world.Airports.Add(newAirport);
+            Scene.Current.AddObject(obj);
             LastAirportSpawnInSeconds = Time.GameTimer.TotalSeconds;
         }
 
