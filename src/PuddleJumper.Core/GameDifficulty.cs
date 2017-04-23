@@ -29,5 +29,6 @@ namespace PuddleJumper.Core
         public float PlaneSpeedMultiplier { get; set; }
 
         public int GameAreaSize { get; set; } = 1200;
+        public bool TeaserMode { get; set; } = true;
     }
 }

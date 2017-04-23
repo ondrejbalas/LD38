@@ -37,7 +37,6 @@ namespace PuddleJumper.Core.Generators
 
             var newPlane = obj.GetComponentsInChildren<PlaneController>().Single();
             newPlane.TargetAirport = airports.dest;
-            newPlane.IsSelected = true;
             newPlane.Number = lastAssignedPlaneNumber++;
             newPlane.Type = type;
             newPlane.Scorekeeper = scorekeeper;
