@@ -32,7 +32,7 @@ namespace PuddleJumper.Core.Shapes
             if (isHovering != currentFrameHovering)
             {
                 isHovering = currentFrameHovering;
-                //Redraw(isHovering ? HoverColor : Color);
+                Redraw(isHovering ? HoverColor : Color);
             }
 
             // Is Clicked

@@ -37,7 +37,7 @@ namespace PuddleJumper.Core.GameObjects
 
         public void UpdateUi()
         {
-            Scene.Current.FindGameObject("Menu").ChildByName("MoneyText").GetComponent<TextRenderer>().Text.SourceText = $"$ {Money:#,000}";
+            Scene.Current.FindGameObject("Menu").ChildByName("MoneyText").GetComponent<TextRenderer>().Text.SourceText = $"$ {Money:#,##0}";
         }
     }
 }
