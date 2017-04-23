@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using Duality;
 using Duality.Resources;
 using PuddleJumper.Core.GameObjects.Map;
@@ -11,16 +12,18 @@ namespace PuddleJumper.Core.GameObjects
         public WorldMap MapObject { get; set; }
         public WorldMapData MapData { get; set; }
         public AirportSpawner AirportSpawner { get; set; }
+        public PlaneSpawner PlaneSpawner { get; set; }
         public List<AirportController> Airports { get; set; } = new List<AirportController>();
         public List<PlaneController> Planes { get; set; } = new List<PlaneController>();
 
         private bool regenerateWorld;
 
-        public World(WorldMapData mapData, AirportSpawner airportSpawner)
+        public World(WorldMapData mapData, AirportSpawner airportSpawner, PlaneSpawner planeSpawner)
         {
             regenerateWorld = true;
             MapData = mapData;
             AirportSpawner = airportSpawner;
+            PlaneSpawner = planeSpawner;
         }
 
         public void RegenerateWorld()
@@ -48,6 +51,10 @@ namespace PuddleJumper.Core.GameObjects
             }
 
             AirportSpawner.Update();
+            if (!Planes.Any())
+            {
+                PlaneSpawner.SpawnPlane(1);
+            }
         }
 
         public void GenerateNewMap()

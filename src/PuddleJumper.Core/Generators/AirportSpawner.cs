@@ -104,7 +104,6 @@ namespace PuddleJumper.Core.Generators
             {
                 SpawnAirport();
             }
-            ;
         }
     }
 }

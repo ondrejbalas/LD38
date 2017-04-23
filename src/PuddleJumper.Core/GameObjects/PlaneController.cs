@@ -1,4 +1,5 @@
-﻿using Duality;
+﻿using System;
+using Duality;
 using Duality.Components;
 using Duality.Components.Renderers;
 using Duality.Editor;
@@ -13,6 +14,10 @@ namespace PuddleJumper.Core.GameObjects
         public int Number { get; set; }
         public bool IsSelected { get; set; }
         public int Size { get; set; }
+        public AirportController TargetAirport { get; set; }
+
+        private Random rng = new Random();
+        private double lastHop = 0;
 
         public void OnInit(InitContext context)
         {
@@ -24,12 +29,22 @@ namespace PuddleJumper.Core.GameObjects
 
         public void OnUpdate()
         {
+            if (lastHop + 5 < Time.GameTimer.TotalSeconds)
+            {
+                lastHop = Time.GameTimer.TotalSeconds;
+                TargetAirport = Startup.World.Airports[rng.Next(Startup.World.Airports.Count)];
+            }
+
             var distance = Time.TimeMult * Difficulty.Current.PlaneSpeedMultiplier;
             var transform = GameObj.GetComponent<Transform>();
             var pos = transform.Pos;
-            var angle = transform.Angle;
 
-            transform.Pos = new Vector3(new Vector2(pos.X, pos.Y) + Vector2.FromAngleLength(angle, distance), pos.Z);
+            // Calculate new angle
+            var planeAngle = (new Vector2(TargetAirport.X, TargetAirport.Y) - new Vector2(pos.X, pos.Y)).Angle;
+            transform.Angle = planeAngle;
+
+            // Calculate new movement
+            transform.Pos = new Vector3(new Vector2(pos.X, pos.Y) + Vector2.FromAngleLength(planeAngle, distance), pos.Z);
         }
     }
 }
