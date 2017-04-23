@@ -169,14 +169,14 @@ namespace PuddleJumper.Core.GameObjects
                 rotationTransform.Angle = planeAngle;
 
                 // Calculate new movement
-                positionTransform.Pos = new Vector3(new Vector2(pos.X, pos.Y) + Vector2.FromAngleLength(planeAngle, distance),
-                    pos.Z);
+                positionTransform.Pos = new Vector3(new Vector2(pos.X, pos.Y) + Vector2.FromAngleLength(planeAngle, distance), pos.Z);
             }
             else
             {
                 AtAirport = true;
                 TargetAirport.Planes.Add(this);
                 rotationTransform.Angle = 0;
+                LastBoardTime = Time.GameTimer.TotalSeconds;
             }
         }
 
@@ -185,8 +185,7 @@ namespace PuddleJumper.Core.GameObjects
             if (typeChanged)
             {
                 typeChanged = false;
-                var material = ContentProvider.RequestContent<Material>($@"Data\Art\{Parameters.MaterialName}.Material.res")
-                    .Res;
+                var material = ContentProvider.RequestContent<Material>($@"Data\Art\{Parameters.MaterialName}.Material.res").Res;
                 var texture = material.MainTexture.Res;
                 var renderer = GameObj.GetComponent<SpriteRenderer>();
                 renderer.Rect = new Rect(-texture.Size.X / 2, -texture.Size.Y / 2, texture.Size.X, texture.Size.Y);

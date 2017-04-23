@@ -88,11 +88,6 @@ namespace PuddleJumper.Core.GameObjects
             var rect = new Rect(bottomRect.X, topRect.Y, topRect.W, topRect.Y + topRect.H + bottomRect.H);
             var currentRectangle = new Rect(rect.X + positionTransform.Pos.X, rect.Y + positionTransform.Pos.Y, rect.W, rect.H);
 
-            if (DualityApp.Mouse.ButtonHit(MouseButton.Right))
-            {
-                ;
-            }
-
             if (Startup.World.SelectedPlane != null)
             {
                 var offset = Key.F9;

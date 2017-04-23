@@ -33,7 +33,7 @@ namespace PuddleJumper.Core.Generators
                 planePrefab = ContentProvider.RequestContent<Prefab>(@"Data\Prefabs\PlanePrefab.Prefab.res");
             }
 
-            var obj = planePrefab.Res.Instantiate(new Vector3(airports.src.X, airports.src.Y, 0));
+            var obj = planePrefab.Res.Instantiate(new Vector3(airports.src.X, airports.src.Y, -100));
 
             var newPlane = obj.GetComponentsInChildren<PlaneController>().Single();
             newPlane.TargetAirport = airports.dest;
