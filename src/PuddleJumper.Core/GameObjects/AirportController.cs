@@ -22,6 +22,7 @@ namespace PuddleJumper.Core.GameObjects
 
         public double NextSpawnTime { get; set; }
         public List<Passenger> Passengers { get; set; } = new List<Passenger>();
+        public List<PlaneController> Planes { get; set; } = new List<PlaneController>();
 
         private bool initComplete = false;
         public void OnInit(InitContext context)
