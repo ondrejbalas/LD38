@@ -41,6 +41,11 @@ namespace PuddleJumper.Core.GameObjects
                 }
             }
 
+            if (DualityApp.ExecContext == DualityApp.ExecutionContext.Editor)
+            {
+                return;
+            }
+
             AirportSpawner.Update();
         }
 

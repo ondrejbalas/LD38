@@ -15,7 +15,7 @@ namespace PuddleJumper.Core.GameObjects
         private static Random rng = new Random();
 
         public string Name { get; set; } = "Airport Name";
-        public char Letter => Name[0];
+        public char Letter => string.IsNullOrEmpty(Name) ? ' ' : Name[0];
         public int Size { get; set; } = 1;
         public int X => (int)GameObj.GetComponent<Transform>().Pos.X;
         public int Y => (int)GameObj.GetComponent<Transform>().Pos.Y;
@@ -28,7 +28,14 @@ namespace PuddleJumper.Core.GameObjects
         {
             if (context == InitContext.Activate)
             {
-                GameObj.ChildByName("NameText").GetComponent<TextRenderer>().Text.SourceText = Name;
+                if (string.IsNullOrEmpty(Name))
+                {
+                    Name = "City Name";
+                }
+
+                GameObj.ChildByName("NameText").GetComponent<TextRenderer>().Text.SourceText = $"/cffff00fd/f[1]{Letter}/f[0]/cffffffff{Name.Substring(1)}";
+                //GameObj.ChildByName("NameText").GetComponent<TextRenderer>().Text.SourceText = $"/f[1]/cffff00ff{Letter}/f[0]/cffffffff{Name.Substring(1)}";
+                //GameObj.ChildByName("NameText").GetComponent<TextRenderer>().Text.SourceText = $"/cffff00ff{Letter}/cffffffff{Name.Substring(1)}";
                 GameObj.ChildByName("SizeText").GetComponent<TextRenderer>().Text.SourceText = Size.ToString();
                 GameObj.ChildByName("PassengersText").GetComponent<TextRenderer>().Text.SourceText = "";
                 //UpdatePosition(true);
