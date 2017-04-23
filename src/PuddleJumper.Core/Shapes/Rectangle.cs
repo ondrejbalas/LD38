@@ -63,6 +63,8 @@ namespace PuddleJumper.Core.Shapes
 
         public void OnInit(InitContext context)
         {
+            pixelDataRectangle = new Rect();
+
             if (context == InitContext.Activate)
             {
                 CheckForResize();
