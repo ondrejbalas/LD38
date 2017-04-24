@@ -13,7 +13,7 @@ namespace PuddleJumper.Core
                 StartingAirports = 3,
                 MaxAirports = 7,
                 MinimumAirportDistance = 250,
-                PassengerPatience = 45,
+                PassengerPatience = 60,
                 PassengerSpawnDelays = new []{ 16, 11, 9, 5 }.ToList(),
                 PassengerSpawnDelayFluctuation = 0.2f,
                 PlaneSpeedMultiplier = 1.5f / 250,
@@ -28,11 +28,11 @@ namespace PuddleJumper.Core
                 StartingAirports = 3,
                 MaxAirports = 7,
                 MinimumAirportDistance = 250,
-                PassengerPatience = 45,
+                PassengerPatience = 60,
                 PassengerSpawnDelays = new []{ 16, 11, 9, 5 }.ToList(),
                 PassengerSpawnDelayFluctuation = 0.2f,
                 PlaneSpeedMultiplier = 1.5f / 250,
-                MoneyMultiplier = 2.5f,
+                MoneyMultiplier = 3.0f,
                 PassengersDeliveredToUpgradeAirport = 20,
                 MaxAirportSize = 4
             };
