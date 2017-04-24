@@ -47,7 +47,7 @@ namespace PuddleJumper.Core.Generators
 
             // Set sell text
             var textRenderer = hasPlaneObj.ChildByName("SellButton").ChildByName("Text").GetComponent<TextRenderer>();
-            var amount = type.GetValue();
+            var amount = type.GetValue() / 2;
             textRenderer.Text.SourceText = $"Sell +${amount:###,##0}";
 
             // Update parameters

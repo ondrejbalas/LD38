@@ -84,7 +84,7 @@ namespace PuddleJumper.Core.GameObjects
             if (destroy)
             {
                 RemoveFromMenu();
-                foreach (var passenger in Passengers)
+                foreach (var passenger in Passengers.ToList())
                 {
                     Scorekeeper.AddAngryPassenger(passenger);
                     Passengers.Remove(passenger);
@@ -153,6 +153,7 @@ namespace PuddleJumper.Core.GameObjects
                     deplaningPassenger.ArrivalTime = Time.GameTimer.TotalSeconds;
                     Scorekeeper.AddDeplanedPassenger(deplaningPassenger);
                     LastBoardTime = Time.GameTimer.TotalSeconds;
+                    TargetAirport.ReceivedPax++;
                 }
 
                 // nope? ok lets get people on, oldest first

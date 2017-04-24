@@ -89,8 +89,8 @@ namespace PuddleJumper.Core.Generators
 
         private (int x, int y, MapPoint pt) GetRandomPoint()
         {
-            var x = rng.Next(data.GameAreaMap.Width);
-            var y = rng.Next(data.GameAreaMap.Height);
+            var x = rng.Next(50, data.GameAreaMap.Width - 200);
+            var y = rng.Next(100, data.GameAreaMap.Height - 200);
             var pt = data.GameAreaMap[x, y].ToMapPoint();
             return (x, y, pt);
         }

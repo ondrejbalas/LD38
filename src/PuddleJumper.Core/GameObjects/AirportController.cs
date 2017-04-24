@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.Remoting.Activation;
 using Duality;
 using Duality.Components;
 using Duality.Components.Renderers;
@@ -26,6 +27,9 @@ namespace PuddleJumper.Core.GameObjects
         public double NextSpawnTime { get; set; }
         public List<Passenger> Passengers { get; set; } = new List<Passenger>();
         public List<PlaneController> Planes { get; set; } = new List<PlaneController>();
+
+        private int nextAirportUpgrade = Difficulty.Current.PassengersDeliveredToUpgradeAirport;
+        public int ReceivedPax { get; set; }
 
         private bool initComplete = false;
         public void OnInit(InitContext context)
@@ -55,6 +59,13 @@ namespace PuddleJumper.Core.GameObjects
         public void OnUpdate()
         {
             if (Size < 1) return;
+
+            if (ReceivedPax >= nextAirportUpgrade && Size < Difficulty.Current.MaxAirportSize)
+            {
+                nextAirportUpgrade += Difficulty.Current.PassengersDeliveredToUpgradeAirport;
+                Size++;
+
+            }
 
             // Update size textbox
             GameObj.ChildByName("SizeText").GetComponent<TextRenderer>().Text.SourceText = Size.ToString();
