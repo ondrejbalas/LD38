@@ -78,6 +78,7 @@ namespace PuddleJumper.Core.GameObjects
         private PlaneTypes type;
         private bool typeChanged = false;
         private bool destroy = false;
+        private double fuelBurn = 0;
 
         public void OnUpdate()
         {
@@ -110,6 +111,7 @@ namespace PuddleJumper.Core.GameObjects
             if (!AtAirport)
             {
                 MovePlane();
+                BurnFuel();
             }
             else
             {
@@ -117,6 +119,17 @@ namespace PuddleJumper.Core.GameObjects
             }
 
             HandlePlaneSelection();
+        }
+
+        private void BurnFuel()
+        {
+            fuelBurn += (Time.TimeMult * Parameters.FuelBurnRate) / 1000 * 16.6666660308838;
+            if (fuelBurn >= 1)
+            {
+                var fuelBurnAsInt = (int)Math.Floor(fuelBurn);
+                Scorekeeper.Money -= fuelBurnAsInt;
+                fuelBurn -= fuelBurnAsInt;
+            }
         }
 
         private void HandlePlaneSelection()

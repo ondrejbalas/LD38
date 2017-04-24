@@ -21,7 +21,7 @@ namespace PuddleJumper.Core.GameObjects.Plane
                     {
                         PassengerCapacity = 3,
                         BoardingDelay = 4,
-                        FuelBurnRate = 1f,
+                        FuelBurnRate = 100f,
                         LuxuryLevel = 0,
                         Speed = 200f,
                         MaterialName = "plane-small"
@@ -31,7 +31,7 @@ namespace PuddleJumper.Core.GameObjects.Plane
                     {
                         PassengerCapacity = 6,
                         BoardingDelay = 3,
-                        FuelBurnRate = 2f,
+                        FuelBurnRate = 200f,
                         LuxuryLevel = 0,
                         Speed = 300f,
                         MaterialName = "plane-med"
@@ -41,7 +41,7 @@ namespace PuddleJumper.Core.GameObjects.Plane
                     {
                         PassengerCapacity = 10,
                         BoardingDelay = 2,
-                        FuelBurnRate = 8f,
+                        FuelBurnRate = 800f,
                         LuxuryLevel = 0,
                         Speed = 600f,
                         MaterialName = "plane-big"
@@ -51,7 +51,7 @@ namespace PuddleJumper.Core.GameObjects.Plane
                     {
                         PassengerCapacity = 24,
                         BoardingDelay = 1,
-                        FuelBurnRate = 30f,
+                        FuelBurnRate = 3000f,
                         LuxuryLevel = 0,
                         Speed = 450f,
                         MaterialName = "plane-jumbo"

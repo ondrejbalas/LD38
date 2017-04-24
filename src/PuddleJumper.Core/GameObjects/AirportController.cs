@@ -24,6 +24,8 @@ namespace PuddleJumper.Core.GameObjects
         public int X => (int)GameObj.GetComponent<Transform>().Pos.X;
         public int Y => (int)GameObj.GetComponent<Transform>().Pos.Y;
 
+        public GameObject AirportPrefab { get; set; }
+
         public double NextSpawnTime { get; set; }
         public List<Passenger> Passengers { get; set; } = new List<Passenger>();
         public List<PlaneController> Planes { get; set; } = new List<PlaneController>();
@@ -65,6 +67,7 @@ namespace PuddleJumper.Core.GameObjects
                 nextAirportUpgrade += Difficulty.Current.PassengersDeliveredToUpgradeAirport;
                 Size++;
 
+                AirportPrefab.ChildByName("SizeText").GetComponent<TextRenderer>().Text.SourceText = Size.ToString();
             }
 
             // Update size textbox

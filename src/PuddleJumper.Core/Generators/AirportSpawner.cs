@@ -49,6 +49,7 @@ namespace PuddleJumper.Core.Generators
             newAirport.Size = 1;
             newAirport.NextSpawnTime = rng.Next(0, Difficulty.Current.PassengerSpawnDelays[0]);
             newAirport.Scorekeeper = scorekeeper;
+            newAirport.AirportPrefab = obj;
 
             world.Airports.Add(newAirport);
             Scene.Current.AddObject(obj);
