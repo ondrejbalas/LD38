@@ -24,7 +24,7 @@ namespace PuddleJumper.Core.GameObjects
 
             var dist = new Vector2(src.X, src.Y).GetDistance(new Vector2(dest.X, dest.Y));
             var travelTime = passenger.ArrivalTime - passenger.SpawnTime;
-            var timeMoneyMultiplier = Math.Max(Difficulty.Current.PassengerPatience - travelTime, 0) * Difficulty.Current.MoneyMultiplier;
+            var timeMoneyMultiplier = Math.Max((Difficulty.Current.PassengerPatience - travelTime) / Difficulty.Current.PassengerPatience, 0) * Difficulty.Current.MoneyMultiplier;
             Money += (int)(timeMoneyMultiplier * dist);
 
             deplanedPassengers.Add(passenger);
