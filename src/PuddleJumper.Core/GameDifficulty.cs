@@ -32,7 +32,7 @@ namespace PuddleJumper.Core
                 PassengerSpawnDelays = new []{ 16, 11, 9, 5 }.ToList(),
                 PassengerSpawnDelayFluctuation = 0.2f,
                 PlaneSpeedMultiplier = 1.5f / 250,
-                MoneyMultiplier = 3.0f,
+                MoneyMultiplier = 6.0f,
                 PassengersDeliveredToUpgradeAirport = 20,
                 MaxAirportSize = 4
             };
