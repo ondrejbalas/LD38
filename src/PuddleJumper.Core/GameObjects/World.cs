@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using Duality;
+using Duality.Components.Renderers;
 using Duality.Input;
 using Duality.Resources;
 using PuddleJumper.Core.GameObjects.Map;
@@ -61,6 +62,10 @@ namespace PuddleJumper.Core.GameObjects
                 planeMenuObj.Name = "PlaneInMenu" + (i + 1);
                 planeMenuObj.ChildByName("RightArea").ChildByName("HasPlane").Active = false;
                 planeMenuObj.ChildByName("LeftArea").ChildByName("Image").Active = false;
+
+                planeMenuObj.ChildByName("LeftArea").ChildByName("Passengers").ChildByName("PassengersText").GetComponent<TextRenderer>().Text.SourceText = "";
+                planeMenuObj.ChildByName("LeftArea").ChildByName("Destination").ChildByName("Text").GetComponent<TextRenderer>().Text.SourceText = "";
+
                 foreach (var buyPlaneChild in planeMenuObj.ChildByName("RightArea").ChildByName("NoPlane").Children.Where(child => child.Name == "BuyPlane"))
                 {
                     var button = buyPlaneChild.ChildByName("Button").GetComponent<Button>();

@@ -62,6 +62,7 @@ namespace PuddleJumper.Core.GameObjects
                     targetAirport.Planes.Remove(this);
                     AtAirport = false;
                     targetAirport = value;
+                    PlaneInMenu.ChildByName("LeftArea").ChildByName("Destination").ChildByName("Text").GetComponent<TextRenderer>().Text.SourceText = targetAirport.Name;
                 }
             }
         }
@@ -104,6 +105,7 @@ namespace PuddleJumper.Core.GameObjects
 
             // Update passenger list
             GameObj.Parent.ChildByName("PassengersText").GetComponent<TextRenderer>().Text.SourceText = string.Join("", Passengers.Select(p => p.ToString()));
+            PlaneInMenu.ChildByName("LeftArea").ChildByName("Passengers").ChildByName("PassengersText").GetComponent<TextRenderer>().Text.SourceText = string.Join("", Passengers.Select(p => p.ToString()));
 
             if (!AtAirport)
             {
