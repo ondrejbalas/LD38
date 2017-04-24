@@ -17,9 +17,9 @@ namespace PuddleJumper.Core
         protected override void InitPlugin()
         {
             DualityUserData data = DualityApp.UserData;
-            data.GfxMode = ScreenMode.Fullscreen;
-            data.GfxWidth = 1600;
-            data.GfxHeight = 900;
+            //data.GfxMode = ScreenMode.Window;
+            //data.GfxWidth = 1600;
+            //data.GfxHeight = 900;
             DualityApp.UserData = data;
             DualityApp.SaveUserData();
 

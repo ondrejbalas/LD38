@@ -12,7 +12,7 @@ namespace PuddleJumper.Core.GameObjects
     {
         private List<Passenger> deplanedPassengers = new List<Passenger>();
         private List<Passenger> angryPassengers = new List<Passenger>();
-        public int Money { get; set; } = 5000;
+        public int Money { get; set; } = Difficulty.Current.StartingMoney;
 
         private Lazy<World> lazyWorld = new Lazy<World>(() => Startup.World);
         private World world { get { return lazyWorld.Value; } }
@@ -25,7 +25,7 @@ namespace PuddleJumper.Core.GameObjects
             var dist = new Vector2(src.X, src.Y).GetDistance(new Vector2(dest.X, dest.Y));
             var travelTime = passenger.ArrivalTime - passenger.SpawnTime;
             var timeMoneyMultiplier = Math.Max((Difficulty.Current.PassengerPatience - travelTime) / Difficulty.Current.PassengerPatience, 0) * Difficulty.Current.MoneyMultiplier;
-            Money += (int)(timeMoneyMultiplier * dist);
+            Money += (int)((timeMoneyMultiplier + 1) * dist);
 
             deplanedPassengers.Add(passenger);
         }

@@ -7,10 +7,10 @@ namespace PuddleJumper.Core
     {
         public static Difficulty Current { get; set; } = Difficulty.Normal;
 
-        private static Difficulty Testing => new Difficulty()
+        private static Difficulty Test => new Difficulty()
             {
                 TimeBetweenAirportSpawns = 60,
-                StartingAirports = 3,
+                StartingAirports = 6,
                 MaxAirports = 7,
                 MinimumAirportDistance = 250,
                 PassengerPatience = 60,
@@ -19,7 +19,8 @@ namespace PuddleJumper.Core
                 PlaneSpeedMultiplier = 1.5f / 250,
                 MoneyMultiplier = 25.0f,
                 PassengersDeliveredToUpgradeAirport = 4,
-                MaxAirportSize = 4
+                MaxAirportSize = 4,
+                StartingMoney = 412410
             };
 
         private static Difficulty Normal => new Difficulty()
@@ -34,7 +35,8 @@ namespace PuddleJumper.Core
                 PlaneSpeedMultiplier = 1.5f / 250,
                 MoneyMultiplier = 6.0f,
                 PassengersDeliveredToUpgradeAirport = 20,
-                MaxAirportSize = 4
+                MaxAirportSize = 4,
+                StartingMoney = 5000
             };
 
 
@@ -49,6 +51,7 @@ namespace PuddleJumper.Core
         public float MoneyMultiplier { get; set; }
         public int PassengersDeliveredToUpgradeAirport { get; set; }
         public int MaxAirportSize { get; set; }
+        public int StartingMoney { get; set; }
 
         public int GameAreaSize { get; set; } = 1200;
         public bool TeaserMode { get; set; } = false;
