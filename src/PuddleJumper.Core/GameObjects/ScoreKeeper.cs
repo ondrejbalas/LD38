@@ -12,7 +12,7 @@ namespace PuddleJumper.Core.GameObjects
     {
         private List<Passenger> deplanedPassengers = new List<Passenger>();
         private List<Passenger> angryPassengers = new List<Passenger>();
-        public int Money { get; set; } = 0;
+        public int Money { get; set; } = 5000;
 
         private Lazy<World> lazyWorld = new Lazy<World>(() => Startup.World);
         private World world { get { return lazyWorld.Value; } }

@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 using Duality;
 using Duality.Components;
 using Duality.Components.Renderers;
@@ -16,8 +17,12 @@ namespace PuddleJumper.Core.Shapes
         public bool IsClicked { get; set; }
         private bool isHovering = false;
 
+        public Action ClickAction { get; set; }
+
         public override void OnUpdate()
         {
+            if (!Active) return;
+
             base.OnUpdate();
 
             // Calculate my rectangle in worldspace
@@ -37,6 +42,12 @@ namespace PuddleJumper.Core.Shapes
 
             // Is Clicked
             IsClicked = MouseButton.Left.IsClicked(currentRectangle);
+
+            if (IsClicked)
+            {
+                //Log.Game.WriteWarning("Button clicked: " + Name);
+                ClickAction();
+            }
         }
     }
 }

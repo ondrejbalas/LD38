@@ -68,12 +68,33 @@ namespace PuddleJumper.Core.GameObjects
 
         public bool AtAirport { get; set; } = false;
 
+        public void Destroy()
+        {
+            destroy = true;
+        }
+
         private Random rng = new Random();
         private PlaneTypes type;
         private bool typeChanged = false;
+        private bool destroy = false;
 
         public void OnUpdate()
         {
+            if (destroy)
+            {
+                RemoveFromMenu();
+                foreach (var passenger in Passengers)
+                {
+                    Scorekeeper.AddAngryPassenger(passenger);
+                    Passengers.Remove(passenger);
+                }
+
+                var objToRemove = GameObj.Parent;
+                Scene.Current.RemoveObject(objToRemove);
+
+                return;
+            }
+
             CheckType();
 
             if (!inMenu)
