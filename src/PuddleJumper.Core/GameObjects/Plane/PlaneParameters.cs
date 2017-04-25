@@ -51,7 +51,7 @@ namespace PuddleJumper.Core.GameObjects.Plane
                     {
                         PassengerCapacity = 24,
                         BoardingDelay = 1,
-                        FuelBurnRate = 2000f,
+                        FuelBurnRate = 700f,
                         LuxuryLevel = 0,
                         Speed = 450f,
                         MaterialName = "plane-jumbo"
